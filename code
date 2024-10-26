@@ -1,0 +1,128 @@
+#include <iostream>
+#include <string>
+
+// SmartLight class
+class SmartLight {
+public:
+    void turnOn() {
+        state = true;
+        std::cout << "The light is ON." << std::endl;
+    }
+    void turnOff() {
+        state = false;
+        std::cout << "The light is OFF." << std::endl;
+    }
+    void getState() {
+        if (state) {
+            std::cout << "Current state: ON" << std::endl;
+        } else {
+            std::cout << "Current state: OFF" << std::endl;
+        }
+    }
+    void dim(int level) {
+        if (level >= 0 && level <= 100) {
+            brightness = level;
+            std::cout << "Light brightness: " << level << "%" << std::endl;
+        } else {
+            std::cout << "Invalid brightness level." << std::endl;
+        }
+    }
+    void changeColor(const std::string& color) {
+        colors = color;
+        std::cout << "Light color: " << color << std::endl;
+    }
+
+private:
+    bool state = false; // Light is OFF by default
+    int brightness = 100; // Default brightness
+    std::string colors = "White"; // Default color
+};
+
+// SmartThermostat class
+class SmartThermostat {
+public:
+    void setTemperature(int temp) {
+        if (temp >= 60 && temp <= 90) {
+            temperature = temp;
+            std::cout << "Current temperature: " << temp << "°F" << std::endl;
+        } else {
+            std::cout << "Invalid temperature." << std::endl;
+        }
+    }
+    void getState() {
+        std::cout << "Current temperature: " << temperature << "°F" << std::endl;
+    }
+
+private:
+    int temperature = 70; // Default temperature
+};
+
+// SmartWindow class
+class SmartWindow {
+public:
+    void openWindow() {
+        isOpen = true;
+        std::cout << "The window is OPEN." << std::endl;
+    }
+    void closeWindow() {
+        isOpen = false;
+        std::cout << "The window is CLOSED." << std::endl;
+    }
+    void getState() {
+        if (isOpen) {
+            std::cout << "Current window state: OPEN" << std::endl;
+        } else {
+            std::cout << "Current window state: CLOSED" << std::endl;
+        }
+    }
+
+private:
+    bool isOpen = false; // Window is CLOSED by default
+};
+
+int main() {
+    SmartLight light;
+    SmartThermostat thermostat;
+    SmartWindow window;
+    int brightnessLevel;
+    std::string color;
+    int temperature;
+    int lightAction;
+    int windowAction;
+
+    // Light actions
+    std::cout << "Enter 1 to turn on the light, 0 to turn off: ";
+    std::cin >> lightAction;
+    if (lightAction == 1) {
+        light.turnOn();
+    } else {
+        light.turnOff();
+    }
+    
+    std::cout << "Enter brightness level (0-100): ";
+    std::cin >> brightnessLevel;
+    light.dim(brightnessLevel);
+    
+    std::cout << "Enter color for the light: ";
+    std::cin >> color;
+    light.changeColor(color);
+    light.getState();
+
+    // Thermostat actions
+    std::cout << "Enter desired temperature (60-90°F): ";
+    std::cin >> temperature;
+    thermostat.setTemperature(temperature);
+    thermostat.getState();
+
+    // Window actions
+    std::cout << "Enter 1 to open the window, 0 to close: ";
+    std::cin >> windowAction;
+    if (windowAction == 1) {
+        window.openWindow();
+    } else {
+        window.closeWindow();
+    }
+    window.getState();
+
+    return 0;
+}
